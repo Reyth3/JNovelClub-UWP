@@ -1,11 +1,11 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
     <MinimumVisualStudioVersion>10.0</MinimumVisualStudioVersion>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{91565ae4-45ba-40e4-9ba0-57a312d33774}</ProjectGuid>
+    <ProjectGuid>{91565AE4-45BA-40E4-9BA0-57A312D33774}</ProjectGuid>
     <OutputType>Library</OutputType>
     <RootNamespace>JNovelClub</RootNamespace>
     <AssemblyName>JNovelClub</AssemblyName>
@@ -33,11 +33,29 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <!-- A reference to the entire .NET Framework is automatically included -->
+    <Compile Include="Api\APIBase.cs" />
+    <Compile Include="Api\AuthAPI.cs" />
+    <Compile Include="Api\PartsAPI.cs" />
+    <Compile Include="Api\SeriesAPI.cs" />
+    <Compile Include="Helpers\RequestHelper.cs" />
+    <Compile Include="JNClient.cs" />
+    <Compile Include="Models\AuthenticationToken.cs" />
+    <Compile Include="Models\Error.cs" />
+    <Compile Include="Models\IResponseModel.cs" />
+    <Compile Include="Models\Part.cs" />
+    <Compile Include="Models\PartData.cs" />
+    <Compile Include="Models\Series.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Response.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Class1.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Reference Include="Newtonsoft.Json, Version=10.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.10.0.3\lib\portable-net45+win8+wp8+wpa81\Newtonsoft.Json.dll</HintPath>
+    </Reference>
   </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
 </Project>
