@@ -35,12 +35,14 @@
   <ItemGroup>
     <Compile Include="Api\APIBase.cs" />
     <Compile Include="Api\AuthAPI.cs" />
+    <Compile Include="Api\EventsAPI.cs" />
     <Compile Include="Api\PartsAPI.cs" />
     <Compile Include="Api\SeriesAPI.cs" />
     <Compile Include="Helpers\RequestHelper.cs" />
     <Compile Include="JNClient.cs" />
     <Compile Include="Models\AuthenticationToken.cs" />
     <Compile Include="Models\Error.cs" />
+    <Compile Include="Models\Event.cs" />
     <Compile Include="Models\IResponseModel.cs" />
     <Compile Include="Models\Part.cs" />
     <Compile Include="Models\PartData.cs" />
