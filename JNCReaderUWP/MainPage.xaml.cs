@@ -1,4 +1,5 @@
-﻿using System;
+﻿using JNCReaderUWP.ViewModel;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -30,6 +31,19 @@ namespace JNCReaderUWP
         private void OpenCloseHamburger(object sender, RoutedEventArgs e)
         {
             hamburgerMenu.IsPaneOpen = !hamburgerMenu.IsPaneOpen;
+            hamburgerMenu.DataContext = new HamburgerMenuItemViewModel[]
+            {
+                new HamburgerMenuItemViewModel('\uE128', "News & Updates", () => { }),
+            };
+        }
+
+        private void HamburgerItemSelected(object sender, ItemClickEventArgs e)
+        {
+            var item = e.ClickedItem as HamburgerMenuItemViewModel;
+            if (item.PageType != null)
+                frame.Navigate(item.PageType);
+            else item.SecondaryAction?.Invoke();
+            hamburgerMenu.IsPaneOpen = false;
         }
     }
 }

@@ -32,12 +32,12 @@
         </Border>
         <SplitView Grid.Row="1" Name="hamburgerMenu" CompactPaneLength="48" OpenPaneLength="180" PaneBackground="{StaticResource HeaderBackgroundColor}" RequestedTheme="Dark" DisplayMode="Overlay">
             <SplitView.Pane>
-                <ListView IsItemClickEnabled="True">
+                <ListView IsItemClickEnabled="True" ItemsSource="{Binding}" ItemClick="HamburgerItemSelected">
                     <ListView.ItemTemplate>
                         <DataTemplate>
-                            <StackPanel Padding="3">
-                                <FontIcon Glyph="{Binding Path=Glyph}" Margin="2,0" />
-                                <TextBlock Text="{Binding Path=Name}" VerticalAlignment="Center" Margin="2,0" />
+                            <StackPanel Orientation="Horizontal" Padding="3">
+                                <FontIcon Glyph="{Binding Path=Glyph}" Margin="2,0" VerticalAlignment="Center" />
+                                <TextBlock Text="{Binding Path=Title}" VerticalAlignment="Center" Margin="2,0" />
                             </StackPanel>
                         </DataTemplate>
                     </ListView.ItemTemplate>
