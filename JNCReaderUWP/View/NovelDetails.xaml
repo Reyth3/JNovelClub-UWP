@@ -1,0 +1,26 @@
+﻿<Page
+    x:Class="JNCReaderUWP.View.NovelDetails"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:JNCReaderUWP.View"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d" Loaded="Page_Loaded">
+
+    <Grid>
+        <StackPanel>
+            <TextBlock Text="{Binding Path=Title}" FontWeight="Medium" FontSize="21" Margin="2" TextWrapping="WrapWholeWords" />
+            <Image Margin="32,4" MaxWidth="184" Source="{Binding Path=CoverUrl}" HorizontalAlignment="Center" />
+            <ItemsControl Margin="2" ItemsSource="{Binding Path=Properties}">
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel>
+                            <TextBlock FontWeight="Medium" FontSize="19" Margin="2" Text="{Binding Path=Key}" TextWrapping="WrapWholeWords" />
+                            <TextBlock FontSize="19" Margin="2" Text="{Binding Path=Value}" TextWrapping="WrapWholeWords" />
+                        </StackPanel>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+        </StackPanel>
+    </Grid>
+</Page>
