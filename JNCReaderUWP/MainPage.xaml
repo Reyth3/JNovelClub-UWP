@@ -24,6 +24,22 @@
 
                 <TextBlock Grid.Column="1" Style="{StaticResource HeaderTextStyle}" Text="J-Novel Club Reader" FontFamily="Segoe UI" FontWeight="SemiBold" />
                 <Button Grid.Column="2" FontFamily="{StaticResource SymbolThemeFontFamily}">
+                    <Button.Flyout>
+                        <Flyout>
+                            <Flyout.FlyoutPresenterStyle>
+                                <Style TargetType="FlyoutPresenter">
+                                    <Setter Property="Background" Value="{StaticResource HeaderBackgroundColor}" />
+                                </Style>
+                            </Flyout.FlyoutPresenterStyle>
+                            <Grid MinWidth="200" Name="logInSection">
+                                <StackPanel>
+                                    <TextBox Header="Username:" Name="lUser" />
+                                    <PasswordBox Header="Password:" Name="lPass" />
+                                    <Button Margin="2,8" HorizontalAlignment="Stretch">Log In</Button>
+                                </StackPanel>
+                            </Grid>
+                        </Flyout>
+                    </Button.Flyout>
                     <SymbolIcon Symbol="Contact" />
                 </Button>
             </Grid>

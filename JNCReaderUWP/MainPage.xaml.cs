@@ -34,6 +34,7 @@ namespace JNCReaderUWP
             hamburgerMenu.DataContext = new HamburgerMenuItemViewModel[]
             {
                 new HamburgerMenuItemViewModel('\uE128', "News & Updates", typeof(View.News)),
+                new HamburgerMenuItemViewModel('\uE1D3', "Light Novels", typeof(View.LightNovels)),
             };
         }
 
