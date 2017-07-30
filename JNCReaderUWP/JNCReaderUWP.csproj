@@ -99,6 +99,7 @@
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ViewModel\API\EventViewModel.cs" />
     <Compile Include="ViewModel\HamburgerMenuItemViewModel.cs" />
     <Compile Include="View\News.xaml.cs">
       <DependentUpon>News.xaml</DependentUpon>

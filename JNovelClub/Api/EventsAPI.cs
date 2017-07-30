@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace JNovelClub.Api
 {
-    class EventsAPI
+    public class EventsAPI
     {
         public EventsAPI(JNClient client)
         {

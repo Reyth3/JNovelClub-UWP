@@ -1,4 +1,6 @@
-﻿using System;
+﻿using JNCReaderUWP.ViewModel.API;
+using JNovelClub;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -25,6 +27,20 @@ namespace JNCReaderUWP.View
         public News()
         {
             this.InitializeComponent();
+        }
+
+        private async void Page_Loaded(object sender, RoutedEventArgs e)
+        {
+            DataContext = null;
+            pw.IsActive = true;
+            var jnc = new JNClient();
+            var eventsResponse = await jnc.Events.GetListOfEvents();
+            DataContext = new
+            {
+                latest = eventsResponse.Result.Where(o => o.Date <= DateTime.Now).OrderByDescending(o => o.Date).Take(15).Select(o => new EventViewModel(o)),
+                upcoming = eventsResponse.Result.Where(o => o.Date > DateTime.Now).OrderBy(o => o.Date).Take(10).Select(o => new EventViewModel(o))
+            };
+            pw.IsActive = false;
         }
     }
 }
