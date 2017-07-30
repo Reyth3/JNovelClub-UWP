@@ -22,6 +22,7 @@ namespace JNovelClub
         private AuthAPI authAPI;
         private SeriesAPI seriesAPI;
         private PartsAPI partsAPI;
+        private EventsAPI eventsAPI;
 
         internal HttpClient _apiClient
         { get
@@ -44,6 +45,7 @@ namespace JNovelClub
         public AuthAPI Auth => authAPI ?? (authAPI = new AuthAPI(this));
         public SeriesAPI Series => seriesAPI ?? (seriesAPI = new SeriesAPI(this));
         public PartsAPI Parts => partsAPI ?? (partsAPI = new PartsAPI(this));
+        public EventsAPI Events => eventsAPI ?? (eventsAPI = new EventsAPI(this));
 
         #region Authentication Shorthand
         public async Task<bool> Authenticate(string email, string password)

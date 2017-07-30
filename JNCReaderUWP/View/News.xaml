@@ -5,9 +5,38 @@
     xmlns:local="using:JNCReaderUWP.View"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    mc:Ignorable="d">
-
+    mc:Ignorable="d" Loaded="Page_Loaded">
+    <Page.Resources>
+        <DataTemplate x:Key="release">
+            <StackPanel>
+                <Border HorizontalAlignment="Right" Style="{StaticResource HeaderStyle}">
+                    <TextBlock Style="{StaticResource HeaderTextStyle}" FontWeight="Medium" Text="{Binding Path=DateString}" />
+                </Border>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="auto" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+                    <Image MaxWidth="140" Source="{Binding Path=PrimaryImageUrl}" Margin="4" />
+                    <StackPanel Grid.Column="1">
+                        <TextBlock Text="{Binding Path=Title}" FontWeight="Medium" FontSize="21" Margin="2" />
+                        <TextBlock Text="{Binding Path=Details}" FontWeight="Normal" FontSize="19" Margin="2" />
+                        <TextBlock Text="{Binding Path=Countdown}" FontWeight="Normal" FontSize="19" Margin="2" FontStyle="Italic" />
+                    </StackPanel>
+                </Grid>
+                <Rectangle Fill="{StaticResource HeaderBackgroundColor}" Height="1" Margin="2,3" />
+            </StackPanel>
+        </DataTemplate>
+    </Page.Resources>
     <Grid>
-
+        <Pivot>
+            <PivotItem Header="Latest">
+                <ListView ItemsSource="{Binding Path=latest}" SelectionMode="None" ItemTemplate="{StaticResource release}" />
+            </PivotItem>
+            <PivotItem Header="Upcoming">
+                <ListView ItemsSource="{Binding Path=upcoming}" SelectionMode="None" ItemTemplate="{StaticResource release}" />
+            </PivotItem>
+        </Pivot>
+        <ProgressRing Name="pw" HorizontalAlignment="Center" VerticalAlignment="Center" Width="48" Background="Transparent" />
     </Grid>
 </Page>

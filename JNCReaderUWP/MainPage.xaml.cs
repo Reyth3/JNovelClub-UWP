@@ -33,7 +33,7 @@ namespace JNCReaderUWP
             hamburgerMenu.IsPaneOpen = !hamburgerMenu.IsPaneOpen;
             hamburgerMenu.DataContext = new HamburgerMenuItemViewModel[]
             {
-                new HamburgerMenuItemViewModel('\uE128', "News & Updates", () => { }),
+                new HamburgerMenuItemViewModel('\uE128', "News & Updates", typeof(View.News)),
             };
         }
 

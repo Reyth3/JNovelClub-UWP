@@ -20,19 +20,17 @@
                     <ColumnDefinition Width="*" />
                     <ColumnDefinition Width="auto" />
                 </Grid.ColumnDefinitions>
-                <Button FontFamily="{StaticResource SymbolThemeFontFamily}" Name="hamburgerButton" Click="OpenCloseHamburger">
-                    <SymbolIcon Symbol="AllApps">
-                    </SymbolIcon>
-                </Button>
-                <TextBlock Grid.Column="1" Style="{StaticResource HeaderTextStyle}" Text="J-Novel Club Reader" />
+                <Button FontFamily="{StaticResource SymbolThemeFontFamily}" Name="hamburgerButton" Click="OpenCloseHamburger" Content="&#xE700;" />
+
+                <TextBlock Grid.Column="1" Style="{StaticResource HeaderTextStyle}" Text="J-Novel Club Reader" FontFamily="Segoe UI" FontWeight="SemiBold" />
                 <Button Grid.Column="2" FontFamily="{StaticResource SymbolThemeFontFamily}">
                     <SymbolIcon Symbol="Contact" />
                 </Button>
             </Grid>
         </Border>
-        <SplitView Grid.Row="1" Name="hamburgerMenu" CompactPaneLength="48" OpenPaneLength="180" PaneBackground="{StaticResource HeaderBackgroundColor}" RequestedTheme="Dark" DisplayMode="Overlay">
+        <SplitView Grid.Row="1" Name="hamburgerMenu" CompactPaneLength="48" OpenPaneLength="180" PaneBackground="{StaticResource HeaderBackgroundColor}" DisplayMode="Overlay">
             <SplitView.Pane>
-                <ListView IsItemClickEnabled="True" ItemsSource="{Binding}" ItemClick="HamburgerItemSelected">
+                <ListView RequestedTheme="Dark" IsItemClickEnabled="True" ItemsSource="{Binding}" ItemClick="HamburgerItemSelected">
                     <ListView.ItemTemplate>
                         <DataTemplate>
                             <StackPanel Orientation="Horizontal" Padding="3">
