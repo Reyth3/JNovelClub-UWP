@@ -1,4 +1,5 @@
-﻿using System;
+﻿using JNovelClub.Api;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,6 +9,8 @@ namespace JNovelClub.Models
 {
     public class Part : IResponseModel
     {
+        internal PartsAPI _partsApiInstance;
+
         public string Title { get; set; }
         public string Titleslug { get; set; }
         public string TitleShort { get; set; }
@@ -36,9 +39,20 @@ namespace JNovelClub.Models
 
         private PartData _partData;
 
-        public Task<PartData> GetPartData()
+        public async Task<PartData> GetPartData()
         {
-            return null;
+            if (_partsApiInstance == null)
+                throw new NullReferenceException("The reference to Parts API instance is not set.");
+            else if (_partData != null)
+                return _partData;
+            else
+            {
+                var response = await _partsApiInstance.GetPartData(Id);
+                if (response.Success)
+                    _partData = response.Result;
+                else _partData = null;
+                return _partData;
+            }
         }
     }
 }

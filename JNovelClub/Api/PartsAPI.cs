@@ -26,7 +26,11 @@ namespace JNovelClub.Api
             using (var http = _client._apiClient)
             using (var res = await http.GetAsync("api/parts?filter=" + WebUtility.UrlEncode(f)))
             {
-                return new Response<Part[]>(await res.Content.ReadAsStringAsync());
+                var response = new Response<Part[]>(await res.Content.ReadAsStringAsync());
+                if (response.Success)
+                    foreach (var part in response.Result)
+                        part._partsApiInstance = this;
+                return response;
             }
         }
 
@@ -37,7 +41,10 @@ namespace JNovelClub.Api
             using (var http = _client._apiClient)
             using (var res = await http.GetAsync("api/parts/getOne?filter=" + WebUtility.UrlEncode(f)))
             {
-                return new Response<Part>(await res.Content.ReadAsStringAsync());
+                var response = new Response<Part>(await res.Content.ReadAsStringAsync());
+                if (response.Success)
+                    response.Result._partsApiInstance = this;
+                return response;
             }
         }
 
