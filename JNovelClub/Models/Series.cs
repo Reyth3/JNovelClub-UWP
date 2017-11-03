@@ -28,6 +28,7 @@ namespace JNovelClub.Models
         public int PostCount { get; set; }
         public Attachment[] Attachments { get; set; }
         public int TotalVolumes { get; set; }
+        public Part[] Parts { get; set; }
     }
 
     public class Attachment

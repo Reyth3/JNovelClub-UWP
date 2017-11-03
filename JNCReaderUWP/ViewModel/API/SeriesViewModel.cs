@@ -5,12 +5,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace JNCReaderUWP.ViewModel
+namespace JNCReaderUWP.ViewModel.API
 {
     public class SeriesViewModel
     {
         public SeriesViewModel(Series s)
         {
+            Id = s.Id;
             Title = s.Title;
             Description = s.Description;
             OriginalTitle = s.TitleOriginal;
@@ -20,8 +21,10 @@ namespace JNCReaderUWP.ViewModel
             ShortDescription = s.DescriptionShort;
             CoverUrl = new Uri(new Uri("https://s3.amazonaws.com/production.j-novel.club/"), s.Attachments.FirstOrDefault()?.FullPath).AbsoluteUri;
             Tags = s.Tags;
+            Parts = s.Parts.Select(o => new PartViewModel(o)).ToArray();
         }
 
+        public string Id { get; set; }
         public string Title { get; set; }
         public string Description { get; set; }
         public string OriginalTitle { get; set; }
@@ -31,6 +34,7 @@ namespace JNCReaderUWP.ViewModel
         public string ShortDescription { get; set; }
         public string CoverUrl { get; set; }
         public string Tags { get; set; }
+        public PartViewModel[] Parts { get; set; }
 
         public KeyValueViewModel[] Properties { get
             {

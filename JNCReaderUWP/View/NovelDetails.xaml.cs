@@ -1,4 +1,6 @@
 ﻿using JNCReaderUWP.ViewModel;
+using JNCReaderUWP.ViewModel.API;
+using JNovelClub;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -48,6 +50,11 @@ namespace JNCReaderUWP.View
                 return;
             }
             DataContext = series;
+        }
+
+        private void PartItemClick(object sender, ItemClickEventArgs e)
+        {
+            Frame.Navigate(typeof(Reader), e.ClickedItem);
         }
     }
 }

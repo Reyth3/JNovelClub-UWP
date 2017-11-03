@@ -9,6 +9,7 @@ namespace JNovelClub.Models
 {
     public class Part : IResponseModel
     {
+        internal JNClient _client;
         internal PartsAPI _partsApiInstance;
 
         public string Title { get; set; }
@@ -42,8 +43,12 @@ namespace JNovelClub.Models
         public async Task<PartData> GetPartData()
         {
             if (_partsApiInstance == null)
-                throw new NullReferenceException("The reference to Parts API instance is not set.");
-            else if (_partData != null)
+            {
+                if (_client == null)
+                    throw new NullReferenceException("The reference to JNClient is not set.");
+                _partsApiInstance = _client.Parts;
+            }
+            if (_partData != null)
                 return _partData;
             else
             {
