@@ -1,11 +1,12 @@
-﻿using JNCReaderUWP.ViewModel;
+﻿using JNCReaderUWP.Helpers;
 using JNCReaderUWP.ViewModel.API;
-using JNovelClub;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
+using System.Threading.Tasks;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
 using Windows.UI.Xaml;
@@ -23,25 +24,29 @@ namespace JNCReaderUWP.View
     /// <summary>
     /// An empty page that can be used on its own or navigated to within a Frame.
     /// </summary>
-    public sealed partial class LightNovels : Page
+    public sealed partial class Reader : Page
     {
-        public LightNovels()
+        public Reader()
         {
             this.InitializeComponent();
         }
 
-        private async void Page_Loaded(object sender, RoutedEventArgs e)
+        PartViewModel part;
+
+        ObservableCollection<FrameworkElement> PagesCollection { get; set; }
+
+        protected override void OnNavigatedTo(NavigationEventArgs e)
         {
-            pw.IsActive = true;
-            var jnc = new JNClient();
-            var seriesResponse = await jnc.Series.GetListOfSeries(null, "parts");
-            DataContext = seriesResponse.Result.OrderBy(o => o.Title).Select(o => new SeriesViewModel(o));
-            pw.IsActive = false;
+            base.OnNavigatedTo(e);
+            part = e.Parameter as PartViewModel;
         }
 
-        private void NovelClicked(object sender, ItemClickEventArgs e)
+        private async void Page_Loaded(object sender, RoutedEventArgs e)
         {
-            Frame.Navigate(typeof(View.NovelDetails), e.ClickedItem);
+            if (part == null)
+                return;
+            var data = await part.GetPartData();
+            chapterText.SetHTML(data.dataHTML);
         }
     }
 }

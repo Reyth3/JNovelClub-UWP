@@ -8,19 +8,46 @@
     mc:Ignorable="d" Loaded="Page_Loaded">
 
     <Grid>
-        <StackPanel>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="3*" />
+        </Grid.RowDefinitions>
             <TextBlock Text="{Binding Path=Title}" FontWeight="Medium" FontSize="21" Margin="2" TextWrapping="WrapWholeWords" />
-            <Image Margin="32,4" MaxWidth="184" Source="{Binding Path=CoverUrl}" HorizontalAlignment="Center" />
-            <ItemsControl Margin="2" ItemsSource="{Binding Path=Properties}">
-                <ItemsControl.ItemTemplate>
-                    <DataTemplate>
-                        <StackPanel>
-                            <TextBlock FontWeight="Medium" FontSize="19" Margin="2" Text="{Binding Path=Key}" TextWrapping="WrapWholeWords" />
-                            <TextBlock FontSize="19" Margin="2" Text="{Binding Path=Value}" TextWrapping="WrapWholeWords" />
-                        </StackPanel>
-                    </DataTemplate>
-                </ItemsControl.ItemTemplate>
-            </ItemsControl>
-        </StackPanel>
+        <Grid Grid.Row="1">
+            <Rectangle Name="blurredNovelCover" Opacity="0.2">
+                <Rectangle.Fill>
+                    <ImageBrush ImageSource="{Binding Path=CoverUrl}" AlignmentX="Center" AlignmentY="Center" Stretch="UniformToFill" />
+                </Rectangle.Fill>
+            </Rectangle>
+            <Image Margin="32,16" MaxWidth="184" Source="{Binding Path=CoverUrl}" HorizontalAlignment="Center" />
+        </Grid>
+        <Pivot Grid.Row="2">
+            <PivotItem Header="Information">
+                <ScrollViewer>
+                    <ItemsControl Margin="2" ItemsSource="{Binding Path=Properties}">
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate>
+                                <StackPanel>
+                                    <TextBlock FontWeight="Medium" FontSize="18" Margin="1,7,1,1" Text="{Binding Path=Key}" TextWrapping="WrapWholeWords" />
+                                    <TextBlock FontSize="17" Margin="1" Text="{Binding Path=Value}" TextWrapping="WrapWholeWords" />
+                                </StackPanel>
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
+                </ScrollViewer>
+            </PivotItem>
+            <PivotItem Header="Chapters">
+                <ListView Name="partsListView" ItemsSource="{Binding Path=Parts}" SelectionMode="None" IsItemClickEnabled="true" ItemClick="PartItemClick">
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <Border Background="{Binding Path=BackgroundBrush}" BorderBrush="LightGray" BorderThickness="1" Padding="4" Margin="6">
+                                <TextBlock Text="{Binding Path=Title}" TextAlignment="Center" FontSize="18" FontWeight="Medium"  TextWrapping="WrapWholeWords" />
+                            </Border>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+            </PivotItem>
+        </Pivot>
     </Grid>
 </Page>
