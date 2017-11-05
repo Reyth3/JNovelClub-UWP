@@ -100,9 +100,13 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ViewModel\API\EventViewModel.cs" />
     <Compile Include="ViewModel\API\PartViewModel.cs" />
+    <Compile Include="ViewModel\API\PostViewModel.cs" />
     <Compile Include="ViewModel\HamburgerMenuItemViewModel.cs" />
     <Compile Include="ViewModel\API\SeriesViewModel.cs" />
     <Compile Include="ViewModel\KeyValueViewModel.cs" />
+    <Compile Include="View\Dialogs\PostDialog.xaml.cs">
+      <DependentUpon>PostDialog.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\LightNovels.xaml.cs">
       <DependentUpon>LightNovels.xaml</DependentUpon>
     </Compile>
@@ -111,6 +115,9 @@
     </Compile>
     <Compile Include="View\NovelDetails.xaml.cs">
       <DependentUpon>NovelDetails.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Posts.xaml.cs">
+      <DependentUpon>Posts.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\Reader.xaml.cs">
       <DependentUpon>Reader.xaml</DependentUpon>
@@ -169,6 +176,10 @@
       <Generator>MSBuild:Compile</Generator>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Page>
+    <Page Include="View\Dialogs\PostDialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\LightNovels.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -178,6 +189,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\NovelDetails.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Posts.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -214,6 +229,7 @@
       <Name>Windows Mobile Extensions for the UWP</Name>
     </SDKReference>
   </ItemGroup>
+  <ItemGroup />
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
     <VisualStudioVersion>14.0</VisualStudioVersion>
   </PropertyGroup>
