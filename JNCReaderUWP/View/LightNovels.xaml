@@ -34,6 +34,6 @@
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>
-        <ProgressRing Name="pw" Width="48" HorizontalAlignment="Center" VerticalAlignment="Center" Background="Transparent" />
+        <ProgressRing Grid.RowSpan="2" Name="pw" Width="48" HorizontalAlignment="Center" VerticalAlignment="Center" Background="Transparent" />
     </Grid>
 </Page>

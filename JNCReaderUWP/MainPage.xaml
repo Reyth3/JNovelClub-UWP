@@ -22,21 +22,28 @@
                 </Grid.ColumnDefinitions>
                 <Button FontFamily="{StaticResource SymbolThemeFontFamily}" Name="hamburgerButton" Click="OpenCloseHamburger" Content="&#xE700;" />
 
-                <TextBlock Grid.Column="1" Style="{StaticResource HeaderTextStyle}" Text="J-Novel Club Reader" FontFamily="Segoe UI" FontWeight="SemiBold" />
+                <Image Grid.Column="1" Source="Assets/Images/WideLogo.png" Margin="4" />
                 <Button Grid.Column="2" FontFamily="{StaticResource SymbolThemeFontFamily}">
                     <Button.Flyout>
-                        <Flyout>
+                        <Flyout Opening="UserFlyoutOpening">
                             <Flyout.FlyoutPresenterStyle>
                                 <Style TargetType="FlyoutPresenter">
                                     <Setter Property="Background" Value="{StaticResource HeaderBackgroundColor}" />
                                 </Style>
                             </Flyout.FlyoutPresenterStyle>
                             <Grid MinWidth="200" Name="logInSection">
-                                <StackPanel>
+                                <StackPanel Name="flyoutLogInPanel">
                                     <TextBox Header="Username:" Name="lUser" />
                                     <PasswordBox Header="Password:" Name="lPass" />
-                                    <Button Margin="2,8" HorizontalAlignment="Stretch">Log In</Button>
+                                    <Button Margin="2,8" HorizontalAlignment="Stretch" Click="FlyoutLogInButtonClick">Log In</Button>
                                 </StackPanel>
+                                <StackPanel Name="flyoutLogOutPanel">
+                                    <Viewbox MaxWidth="150" MaxHeight="150">
+                                        <SymbolIcon HorizontalAlignment="Center" Margin="8" Symbol="Contact" />
+                                    </Viewbox>
+                                    <Button HorizontalAlignment="Stretch" Margin="8" Click="FlyoutLogOutButtonClick">Log Out</Button>
+                                </StackPanel>
+                                <ProgressRing Name="flyoutPw" />
                             </Grid>
                         </Flyout>
                     </Button.Flyout>

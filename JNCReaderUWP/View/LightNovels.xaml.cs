@@ -1,4 +1,5 @@
-﻿using JNCReaderUWP.ViewModel;
+﻿using JNCReaderUWP.Helpers;
+using JNCReaderUWP.ViewModel;
 using JNCReaderUWP.ViewModel.API;
 using JNovelClub;
 using System;
@@ -28,12 +29,13 @@ namespace JNCReaderUWP.View
         public LightNovels()
         {
             this.InitializeComponent();
+            DataContext = null;
         }
 
         private async void Page_Loaded(object sender, RoutedEventArgs e)
         {
             pw.IsActive = true;
-            var jnc = new JNClient();
+            var jnc = JNCHelper.InstantiateClient();
             var seriesResponse = await jnc.Series.GetListOfSeries(null, "parts");
             DataContext = seriesResponse.Result.OrderBy(o => o.Title).Select(o => new SeriesViewModel(o));
             pw.IsActive = false;
