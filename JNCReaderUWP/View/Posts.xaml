@@ -1,0 +1,34 @@
+﻿<Page
+    x:Class="JNCReaderUWP.View.Posts"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:JNCReaderUWP.View"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d" Loaded="Page_Loaded">
+    <Page.Resources>
+        <DataTemplate x:Key="release">
+            <StackPanel MaxHeight="180">
+                <Border HorizontalAlignment="Right" Style="{StaticResource HeaderStyle}">
+                    <TextBlock Style="{StaticResource HeaderTextStyle}" FontWeight="Medium" Text="{Binding Path=DateString}" />
+                </Border>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="auto" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+                    <Image Name="coverArt" MaxWidth="96" Source="{Binding Path=PrimaryImageUrl}" Margin="4" />
+                    <StackPanel Grid.Column="1">
+                        <TextBlock Text="{Binding Path=Title}" FontWeight="Medium" FontSize="21" Margin="2" />
+                        <TextBlock Text="{Binding Path=Details}" FontWeight="Normal" FontSize="19" Margin="2" TextWrapping="WrapWholeWords" TextTrimming="WordEllipsis" />
+                    </StackPanel>
+                </Grid>
+                <Rectangle Fill="{StaticResource HeaderBackgroundColor}" Height="1" Margin="2,3" />
+            </StackPanel>
+        </DataTemplate>
+    </Page.Resources>
+    <Grid>
+        <ListView ItemsSource="{Binding}" SelectionMode="None" ItemTemplate="{StaticResource release}" IsItemClickEnabled="True" ItemClick="PostItemClicked" />
+        <ProgressRing Name="pw" HorizontalAlignment="Center" VerticalAlignment="Center" Width="48" Background="Transparent" />
+    </Grid>
+</Page>
