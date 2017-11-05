@@ -20,14 +20,16 @@ namespace JNCReaderUWP.ViewModel.API
             ShortTitle = part.TitleShort;
             Desctiption = part.Description;
             Expired = part.Expired;
+            Preview = part.Preview;
         }
 
         public string Title { get; set; }
         public string ShortTitle { get; set; }
         public string Desctiption { get; set; }
         public bool Expired { get; set; }
+        public bool Preview { get; set; }
 
-        public SolidColorBrush BackgroundBrush { get { return Expired ? new SolidColorBrush(Color.FromArgb(255, 96, 96, 96)) : new SolidColorBrush(Color.FromArgb(255, 240, 240, 240)); } }
+        public SolidColorBrush BackgroundBrush { get { return Expired && !Preview ? new SolidColorBrush(Color.FromArgb(255, 96, 96, 96)) : new SolidColorBrush(Color.FromArgb(255, 240, 240, 240)); } }
 
         public async Task<PartData> GetPartData()
         {

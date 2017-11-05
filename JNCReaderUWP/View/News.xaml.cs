@@ -1,4 +1,5 @@
-﻿using JNCReaderUWP.ViewModel.API;
+﻿using JNCReaderUWP.Helpers;
+using JNCReaderUWP.ViewModel.API;
 using JNovelClub;
 using System;
 using System.Collections.Generic;
@@ -33,7 +34,7 @@ namespace JNCReaderUWP.View
         {
             DataContext = null;
             pw.IsActive = true;
-            var jnc = new JNClient();
+            var jnc = JNCHelper.InstantiateClient();
             var eventsResponse = await jnc.Events.GetListOfEvents();
             DataContext = new
             {

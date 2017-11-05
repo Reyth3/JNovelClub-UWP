@@ -7,6 +7,10 @@ using Windows.ApplicationModel;
 using Windows.ApplicationModel.Activation;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
+using Windows.Foundation.Metadata;
+using Windows.UI;
+using Windows.UI.Core;
+using Windows.UI.ViewManagement;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
@@ -30,6 +34,41 @@ namespace JNCReaderUWP
         {
             this.InitializeComponent();
             this.Suspending += OnSuspending;
+        }
+
+        private void CustomizeTitleBar()
+        {
+            var barColor = Color.FromArgb(255, 25, 102, 255);
+            var highlightedBarColor = Color.FromArgb(255, 35, 128, 255);
+            //PC customization
+            if (ApiInformation.IsTypePresent("Windows.UI.ViewManagement.ApplicationView"))
+            {
+                var titleBar = ApplicationView.GetForCurrentView().TitleBar;
+                if (titleBar != null)
+                {
+                    titleBar.ButtonBackgroundColor = barColor;
+                    titleBar.ButtonForegroundColor = Colors.White;
+                    titleBar.BackgroundColor = barColor;
+                    titleBar.ForegroundColor = Colors.White;
+                    titleBar.ButtonHoverBackgroundColor = highlightedBarColor;
+                    titleBar.ButtonHoverForegroundColor = Colors.White;
+                    titleBar.ButtonPressedBackgroundColor = Colors.LightBlue;
+                    titleBar.ButtonPressedForegroundColor = Color.FromArgb(255, 128, 128, 200);
+                }
+            }
+
+            //Mobile customization
+            if (ApiInformation.IsTypePresent("Windows.UI.ViewManagement.StatusBar"))
+            {
+
+                var statusBar = StatusBar.GetForCurrentView();
+                if (statusBar != null)
+                {
+                    statusBar.BackgroundOpacity = 1;
+                    statusBar.BackgroundColor = barColor;
+                    statusBar.ForegroundColor = Colors.White;
+                }
+            }
         }
 
         /// <summary>
@@ -67,6 +106,10 @@ namespace JNCReaderUWP
 
             if (e.PrelaunchActivated == false)
             {
+                CustomizeTitleBar();
+                SystemNavigationManager.GetForCurrentView().AppViewBackButtonVisibility = AppViewBackButtonVisibility.Visible;
+                SystemNavigationManager.GetForCurrentView().BackRequested += App_BackRequested;
+
                 if (rootFrame.Content == null)
                 {
                     // When the navigation stack isn't restored navigate to the first page,
@@ -76,6 +119,24 @@ namespace JNCReaderUWP
                 }
                 // Ensure the current window is active
                 Window.Current.Activate();
+            }
+        }
+
+        private void App_BackRequested(object sender, BackRequestedEventArgs e)
+        {
+            var frame = Window.Current.Content as Frame;
+            if(frame != null)
+            {
+                if (frame.Content is MainPage && (frame.Content as MainPage).ContentFrame.CanGoBack)
+                {
+                    (frame.Content as MainPage).ContentFrame.GoBack();
+                    e.Handled = true;
+                }
+                else if (frame.CanGoBack)
+                {
+                    frame.GoBack();
+                    e.Handled = true;
+                }
             }
         }
 

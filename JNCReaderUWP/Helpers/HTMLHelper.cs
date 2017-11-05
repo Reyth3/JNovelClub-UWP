@@ -38,13 +38,13 @@ namespace JNCReaderUWP.Helpers
                         header1.Inlines.Add(new Run() { Text = node.InnerText });
                         return header1;
                     case "h2":
-                        var header2 = new Windows.UI.Xaml.Documents.Paragraph() { FontSize = 17, FontWeight = FontWeights.Medium };
+                        var header2 = new Windows.UI.Xaml.Documents.Paragraph() { FontSize = 20, FontWeight = FontWeights.Medium };
                         header2.Inlines.Add(new Run() { Text = node.InnerText });
                         return header2;
                     case "p":
-                        var paragraph = new Paragraph() { TextIndent = 16, FontSize = 16, Margin = new Windows.UI.Xaml.Thickness(6) };
+                        var paragraph = new Paragraph() { TextIndent = 17, FontSize = 16, Margin = new Windows.UI.Xaml.Thickness(6) };
                         foreach (var childNode in node.ChildNodes)
-                            paragraph.Inlines.Add(ConvertHTMLNode(childNode) as Inline);
+                            AddChild(paragraph, ConvertHTMLNode(childNode));
                         return paragraph;
                     case "b":
                     case "strong":
@@ -63,6 +63,8 @@ namespace JNCReaderUWP.Helpers
                         foreach (var childNode in node.ChildNodes)
                             underline.Inlines.Add(ConvertHTMLNode(childNode) as Inline);
                         return underline;
+                    case "br":
+                        return new LineBreak();
                     case "img":
                         var imageBlock = new Paragraph();
                         var image = new InlineUIContainer();
@@ -79,8 +81,27 @@ namespace JNCReaderUWP.Helpers
             }
             return null;
         }
-    }
 
+        private static void AddChild(TextElement parent, TextElement child)
+        {
+            var inline = child as Inline;
+            if (inline != null)
+                (parent as Paragraph).Inlines.Add(inline);
+            else
+            {
+                var paragraph = parent as Paragraph;
+                paragraph.FontFamily = child.FontFamily;
+                paragraph.FontSize = child.FontSize;
+                paragraph.FontWeight = child.FontWeight;
+                var childParagraph = child as Paragraph;
+                foreach (var run in childParagraph.Inlines.ToList())
+                {
+                    childParagraph.Inlines.Remove(run);
+                    paragraph.Inlines.Add(run);
+                }
+            }
+        }
+    }
     public static class HTMLHelperExtensions
     {
         public static void SetHTML(this RichTextBlock rtb, string html)

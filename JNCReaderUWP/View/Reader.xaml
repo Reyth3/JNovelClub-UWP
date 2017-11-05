@@ -9,8 +9,26 @@
     >
 
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="auto" />
+        </Grid.RowDefinitions>
+        
         <ScrollViewer Padding="4,4,10,4">
             <RichTextBlock Name="chapterText" />
         </ScrollViewer>
+        <Border Grid.Row="1" BorderBrush="#8080A0" BorderThickness="1" CornerRadius="4" Padding="4" HorizontalAlignment="Center" Width="200">
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                <Button Margin="4" Click="ChangeTheme">
+                    <FontIcon Glyph="&#xE793;" />
+                </Button>
+                <Button Name="decreaseFontSize" Margin="4" Click="ChangeFontSize">
+                    <FontIcon Glyph="&#xE8E7;" />
+                </Button>
+                <Button Name="increaseFontSize" Margin="4" Click="ChangeFontSize">
+                    <FontIcon Glyph="&#xE8E8;" />
+                </Button>
+            </StackPanel>
+        </Border>
     </Grid>
 </Page>

@@ -9,10 +9,12 @@ using System.Runtime.InteropServices.WindowsRuntime;
 using System.Threading.Tasks;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
+using Windows.UI.Popups;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
 using Windows.UI.Xaml.Data;
+using Windows.UI.Xaml.Documents;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
@@ -46,7 +48,31 @@ namespace JNCReaderUWP.View
             if (part == null)
                 return;
             var data = await part.GetPartData();
+            if(data == null)
+            {
+                var error = new MessageDialog("This part is not available.", "Error!");
+                await error.ShowAsync();
+                Frame.GoBack();
+                return;
+            }
             chapterText.SetHTML(data.dataHTML);
+        }
+
+        private void ChangeTheme(object sender, RoutedEventArgs e)
+        {
+            if (RequestedTheme == ElementTheme.Light)
+                RequestedTheme = ElementTheme.Dark;
+            else RequestedTheme = ElementTheme.Light;
+        }
+
+        private void ChangeFontSize(object sender, RoutedEventArgs e)
+        {
+            var b = sender as Button;
+            var paragraphs = chapterText.Blocks.OfType<Paragraph>();
+            var change = b.Name[0] == 'i' ? 1 : -1;
+            foreach (var paragraph in paragraphs)
+                if((change == -1 && paragraph.FontSize >= 10) || (change == 1 && paragraph.FontSize <= 100))
+                    paragraph.FontSize += change;
         }
     }
 }
