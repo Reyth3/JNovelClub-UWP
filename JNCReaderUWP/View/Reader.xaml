@@ -17,7 +17,7 @@
         <ScrollViewer Padding="4,4,10,4">
             <RichTextBlock Name="chapterText" />
         </ScrollViewer>
-        <Border Grid.Row="1" BorderBrush="#8080A0" BorderThickness="1" CornerRadius="4" Padding="4" HorizontalAlignment="Center" Width="200">
+        <Border Grid.Row="1" BorderBrush="#8080A0" BorderThickness="1" CornerRadius="4" Padding="4" HorizontalAlignment="Center" Width="245">
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
                 <Button Margin="4" Click="ChangeTheme">
                     <FontIcon Glyph="&#xE793;" />
@@ -28,7 +28,11 @@
                 <Button Name="increaseFontSize" Margin="4" Click="ChangeFontSize">
                     <FontIcon Glyph="&#xE8E8;" />
                 </Button>
+                <Button Margin="4" Click="StartTTSButtonClick">
+                    <FontIcon Glyph="&#xE15D;" />
+                </Button>
             </StackPanel>
         </Border>
+        <MediaElement Visibility="Collapsed" Name="speechPlayer" MediaEnded="SpeechEnded" />
     </Grid>
 </Page>

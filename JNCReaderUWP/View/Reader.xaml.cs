@@ -9,6 +9,7 @@ using System.Runtime.InteropServices.WindowsRuntime;
 using System.Threading.Tasks;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
+using Windows.Media.SpeechSynthesis;
 using Windows.UI.Popups;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
@@ -62,6 +63,8 @@ namespace JNCReaderUWP.View
         {
             if (RequestedTheme == ElementTheme.Light)
                 RequestedTheme = ElementTheme.Dark;
+            else if (RequestedTheme == ElementTheme.Default)
+                RequestedTheme = ElementTheme.Dark;
             else RequestedTheme = ElementTheme.Light;
         }
 
@@ -73,6 +76,46 @@ namespace JNCReaderUWP.View
             foreach (var paragraph in paragraphs)
                 if((change == -1 && paragraph.FontSize >= 10) || (change == 1 && paragraph.FontSize <= 100))
                     paragraph.FontSize += change;
+        }
+
+        int readerPosition;
+        SpeechSynthesizer speech;
+
+        async Task ReadParagraph()
+        {
+            if(speech == null)
+            {
+                speech = new SpeechSynthesizer();
+                speech.Voice = SpeechSynthesizer.DefaultVoice;
+            }
+            if (readerPosition >= chapterText.Blocks.Count)
+                return;
+            var block = chapterText.Blocks[readerPosition];
+            var text = block.GetRawText();
+            if (text == "")
+            {
+                readerPosition++;
+                await ReadParagraph();
+                return;
+            }
+            else if (text == null)
+                return;
+            chapterText.Select((block as Paragraph).ContentStart, (block as Paragraph).ContentEnd);
+            var stream = await speech.SynthesizeTextToStreamAsync(text);
+            speechPlayer.SetSource(stream, stream.ContentType);
+            speechPlayer.Play();
+        }
+
+        private async void StartTTSButtonClick(object sender, RoutedEventArgs e)
+        {
+            readerPosition = 0;
+            await ReadParagraph();
+        }
+
+        private async void SpeechEnded(object sender, RoutedEventArgs e)
+        {
+            readerPosition++;
+            await ReadParagraph();
         }
     }
 }
