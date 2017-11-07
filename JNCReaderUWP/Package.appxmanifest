@@ -1,10 +1,10 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Package xmlns="http://schemas.microsoft.com/appx/manifest/foundation/windows10" xmlns:mp="http://schemas.microsoft.com/appx/2014/phone/manifest" xmlns:uap="http://schemas.microsoft.com/appx/manifest/uap/windows10" IgnorableNamespaces="uap mp">
-  <Identity Name="9edf2a8c-06d7-45c2-8258-0a6c4d94b351" Publisher="CN=mrrey" Version="1.0.0.0" />
-  <mp:PhoneIdentity PhoneProductId="9edf2a8c-06d7-45c2-8258-0a6c4d94b351" PhonePublisherId="00000000-0000-0000-0000-000000000000" />
+  <Identity Name="57091Reyth3.J-NovelClubClientUnofficial" Publisher="CN=B7B2908A-522E-44C5-B207-B2511BBACEB9" Version="1.1.0.0" />
+  <mp:PhoneIdentity PhoneProductId="6ba3e21a-2c1d-4de2-9bc5-0cfa99873ec9" PhonePublisherId="00000000-0000-0000-0000-000000000000" />
   <Properties>
-    <DisplayName>JNCReaderUWP</DisplayName>
-    <PublisherDisplayName>mrrey</PublisherDisplayName>
+    <DisplayName>J-Novel Club Client (Unofficial)</DisplayName>
+    <PublisherDisplayName>Reyth3</PublisherDisplayName>
     <Logo>Assets\StoreLogo.png</Logo>
   </Properties>
   <Dependencies>
@@ -15,7 +15,7 @@
   </Resources>
   <Applications>
     <Application Id="App" Executable="$targetnametoken$.exe" EntryPoint="JNCReaderUWP.App">
-      <uap:VisualElements DisplayName="JNCReaderUWP" Square150x150Logo="Assets\Square150x150Logo.png" Square44x44Logo="Assets\Square44x44Logo.png" Description="JNCReaderUWP" BackgroundColor="#1966FF">
+      <uap:VisualElements DisplayName="J-Novel Club Client (Unofficial)" Square150x150Logo="Assets\Square150x150Logo.png" Square44x44Logo="Assets\Square44x44Logo.png" Description="JNCReaderUWP" BackgroundColor="#1966FF">
         <uap:DefaultTile Wide310x150Logo="Assets\Wide310x150Logo.png" Square310x310Logo="Assets\LargeTile.png" Square71x71Logo="Assets\SmallTile.png">
         </uap:DefaultTile>
         <uap:SplashScreen Image="Assets\SplashScreen.png" BackgroundColor="#1966FF" />

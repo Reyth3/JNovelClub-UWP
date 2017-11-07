@@ -6,9 +6,11 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
+using Windows.ApplicationModel;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
 using Windows.Storage;
+using Windows.System;
 using Windows.UI.Popups;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
@@ -45,8 +47,8 @@ namespace JNCReaderUWP
             hamburgerMenu.IsPaneOpen = !hamburgerMenu.IsPaneOpen;
             hamburgerMenu.DataContext = new HamburgerMenuItemViewModel[]
             {
-                new HamburgerMenuItemViewModel('\uE122', "Announcements", typeof(View.Posts)),
-                new HamburgerMenuItemViewModel('\uE128', "Novel Updates", typeof(View.News)),
+                new HamburgerMenuItemViewModel('\uE70E', "Announcements", typeof(View.Posts)),
+                new HamburgerMenuItemViewModel('\uE14C', "Novel Updates", typeof(View.News)),
                 new HamburgerMenuItemViewModel('\uE1D3', "Light Novels", typeof(View.LightNovels)),
             };
         }
@@ -110,6 +112,40 @@ namespace JNCReaderUWP
                 roaming.Remove(key);
             flyoutLogInPanel.Visibility = Visibility.Visible;
             flyoutLogOutPanel.Visibility = Visibility.Collapsed;
+        }
+
+        private async void JNCWebsiteClick(object sender, RoutedEventArgs e)
+        {
+            await Launcher.LaunchUriAsync(new Uri("https://j-novel.club"));
+        }
+
+        private async void XTZSupportServerItemClick(object sender, RoutedEventArgs e)
+        {
+            await Launcher.LaunchUriAsync(new Uri("https://discord.gg/GugNgeM"));
+        }
+
+        private async void SendFeedbackItemClick(object sender, RoutedEventArgs e)
+        {
+            if (Microsoft.Services.Store.Engagement.StoreServicesFeedbackLauncher.IsSupported())
+            {
+                var launcher = Microsoft.Services.Store.Engagement.StoreServicesFeedbackLauncher.GetDefault();
+                await launcher.LaunchAsync();
+            }
+            else
+            {
+                MessageDialog md = new MessageDialog("The Feedback Hub is not installed on your device.", "Error!");
+                await md.ShowAsync();
+            }
+        }
+
+        private async void ReviewAppItemClick(object sender, RoutedEventArgs e)
+        {
+            await Launcher.LaunchUriAsync(new Uri($"ms-windows-store://review/?PFN={Package.Current.Id.FamilyName}"));
+        }
+
+        private async void SubredditItemClick(object sender, RoutedEventArgs e)
+        {
+            await Launcher.LaunchUriAsync(new Uri("https://reddit.com/r/xyzapps"));
         }
     }
 }

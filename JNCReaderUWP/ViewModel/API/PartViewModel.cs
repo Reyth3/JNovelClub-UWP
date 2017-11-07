@@ -29,7 +29,17 @@ namespace JNCReaderUWP.ViewModel.API
         public bool Expired { get; set; }
         public bool Preview { get; set; }
 
-        public SolidColorBrush BackgroundBrush { get { return Expired && !Preview ? new SolidColorBrush(Color.FromArgb(255, 96, 96, 96)) : new SolidColorBrush(Color.FromArgb(255, 240, 240, 240)); } }
+        public SolidColorBrush BackgroundBrush
+        {
+            get
+            {
+                if (Preview && !Expired)
+                    return new SolidColorBrush(Color.FromArgb(255, 240, 240, 240));
+                else if (!Preview && !Expired)
+                    return new SolidColorBrush(Color.FromArgb(255, 255, 220, 0));
+                else return new SolidColorBrush(Color.FromArgb(255, 96, 96, 96));
+            }
+        }
 
         public async Task<PartData> GetPartData()
         {

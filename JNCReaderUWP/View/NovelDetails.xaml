@@ -1,4 +1,5 @@
 ﻿<Page
+    
     x:Class="JNCReaderUWP.View.NovelDetails"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
@@ -47,6 +48,11 @@
                         </DataTemplate>
                     </ListView.ItemTemplate>
                 </ListView>
+            </PivotItem>
+            <PivotItem Header="Pivots">
+                <Grid Name="Pivot">
+                    
+                </Grid>
             </PivotItem>
         </Pivot>
     </Grid>

@@ -9,8 +9,8 @@
 
     <Grid Background="{StaticResource BackgroundColor}">
         <Grid.RowDefinitions>
-            <RowDefinition Height="9*" />
-            <RowDefinition Height="151*" />
+            <RowDefinition Height="60" />
+            <RowDefinition Height="1*" />
             <RowDefinition Height="auto" />
         </Grid.RowDefinitions>
         <Border RequestedTheme="Dark" Style="{StaticResource HeaderStyle}">
@@ -51,18 +51,40 @@
                 </Button>
             </Grid>
         </Border>
-        <SplitView Grid.Row="1" Name="hamburgerMenu" CompactPaneLength="48" OpenPaneLength="180" PaneBackground="{StaticResource HeaderBackgroundColor}" DisplayMode="Overlay">
+        <SplitView Grid.Row="1" Name="hamburgerMenu" CompactPaneLength="48" OpenPaneLength="220" PaneBackground="{StaticResource HeaderBackgroundColor}" DisplayMode="Overlay">
             <SplitView.Pane>
-                <ListView RequestedTheme="Dark" IsItemClickEnabled="True" ItemsSource="{Binding}" ItemClick="HamburgerItemSelected">
-                    <ListView.ItemTemplate>
-                        <DataTemplate>
-                            <StackPanel Orientation="Horizontal" Padding="3">
-                                <FontIcon Glyph="{Binding Path=Glyph}" Margin="2,0" VerticalAlignment="Center" />
-                                <TextBlock Text="{Binding Path=Title}" VerticalAlignment="Center" Margin="2,0" />
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="auto" />
+                    </Grid.RowDefinitions>
+                    <ListView RequestedTheme="Dark" IsItemClickEnabled="True" ItemsSource="{Binding}" ItemClick="HamburgerItemSelected">
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
+                                <StackPanel Orientation="Horizontal" Padding="3">
+                                    <FontIcon Glyph="{Binding Path=Glyph}" Margin="2,0" VerticalAlignment="Center" />
+                                    <TextBlock Text="{Binding Path=Title}" VerticalAlignment="Center" Margin="2,0" />
+                                </StackPanel>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                    </ListView>
+                    <Button HorizontalAlignment="Stretch" Grid.Row="1" Margin="4" RequestedTheme="Dark">
+                            <StackPanel Orientation="Horizontal">
+                                <FontIcon Margin="2,0" Glyph="&#xE939;" />
+                                <TextBlock Foreground="White" Margin="2,0">Feedback</TextBlock>
                             </StackPanel>
-                        </DataTemplate>
-                    </ListView.ItemTemplate>
-                </ListView>
+                            <Button.Flyout>
+                                <MenuFlyout>
+                                    <MenuFlyoutItem Click="JNCWebsiteClick">J-Novel Club Website</MenuFlyoutItem>
+                                    <MenuFlyoutItem Click="XTZSupportServerItemClick">XYZ Apps Support Server</MenuFlyoutItem>
+                                    <MenuFlyoutItem Click="SubredditItemClick">/r/XYZApps Subreddit</MenuFlyoutItem>
+                                    <MenuFlyoutSeparator />
+                                    <MenuFlyoutItem Click="SendFeedbackItemClick">Send Feedback</MenuFlyoutItem>
+                                    <MenuFlyoutItem Click="ReviewAppItemClick">Review the App</MenuFlyoutItem>
+                                </MenuFlyout>
+                            </Button.Flyout>
+                    </Button>
+                </Grid>
             </SplitView.Pane>
             <Frame Name="frame" />
         </SplitView>
