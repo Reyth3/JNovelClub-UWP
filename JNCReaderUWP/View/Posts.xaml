@@ -19,7 +19,7 @@
                     </Grid.ColumnDefinitions>
                     <Image Name="coverArt" MaxWidth="96" Source="{Binding Path=PrimaryImageUrl}" Margin="4" />
                     <StackPanel Grid.Column="1">
-                        <TextBlock Text="{Binding Path=Title}" FontWeight="Medium" FontSize="21" Margin="2" />
+                        <TextBlock Text="{Binding Path=Title}" FontWeight="Medium" FontSize="21" Margin="2" TextTrimming="WordEllipsis" />
                         <TextBlock Text="{Binding Path=Details}" FontWeight="Normal" FontSize="19" Margin="2" TextWrapping="WrapWholeWords" TextTrimming="WordEllipsis" />
                     </StackPanel>
                 </Grid>

@@ -16,6 +16,7 @@ namespace JNCReaderUWP.ViewModel.API
         public PartViewModel(Part part)
         {
             _model = part;
+            Id = _model.Id;
             Title = part.Title;
             ShortTitle = part.TitleShort;
             Desctiption = part.Description;
@@ -23,6 +24,7 @@ namespace JNCReaderUWP.ViewModel.API
             Preview = part.Preview;
         }
 
+        public string Id { get; set; }
         public string Title { get; set; }
         public string ShortTitle { get; set; }
         public string Desctiption { get; set; }

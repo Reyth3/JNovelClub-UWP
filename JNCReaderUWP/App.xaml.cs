@@ -10,6 +10,7 @@ using Windows.Foundation.Collections;
 using Windows.Foundation.Metadata;
 using Windows.UI;
 using Windows.UI.Core;
+using Windows.UI.Popups;
 using Windows.UI.ViewManagement;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
@@ -34,6 +35,17 @@ namespace JNCReaderUWP
         {
             this.InitializeComponent();
             this.Suspending += OnSuspending;
+            this.UnhandledException += App_UnhandledException;
+        }
+
+        private async void App_UnhandledException(object sender, UnhandledExceptionEventArgs e)
+        {
+            if(e.Exception is System.Net.Http.HttpRequestException)
+            {
+                e.Handled = true;
+                var error = new MessageDialog("Can't connect with the remote server. Please check your internet connection or try again later.", "Error!");
+                await error.ShowAsync();
+            }
         }
 
         private void CustomizeTitleBar()

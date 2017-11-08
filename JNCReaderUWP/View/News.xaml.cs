@@ -28,6 +28,7 @@ namespace JNCReaderUWP.View
         public News()
         {
             this.InitializeComponent();
+            this.SetUpTransitions();
         }
 
         private async void Page_Loaded(object sender, RoutedEventArgs e)

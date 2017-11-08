@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Package xmlns="http://schemas.microsoft.com/appx/manifest/foundation/windows10" xmlns:mp="http://schemas.microsoft.com/appx/2014/phone/manifest" xmlns:uap="http://schemas.microsoft.com/appx/manifest/uap/windows10" IgnorableNamespaces="uap mp">
-  <Identity Name="57091Reyth3.J-NovelClubClientUnofficial" Publisher="CN=B7B2908A-522E-44C5-B207-B2511BBACEB9" Version="1.1.0.0" />
+  <Identity Name="57091Reyth3.J-NovelClubClientUnofficial" Publisher="CN=B7B2908A-522E-44C5-B207-B2511BBACEB9" Version="1.1.1.0" />
   <mp:PhoneIdentity PhoneProductId="6ba3e21a-2c1d-4de2-9bc5-0cfa99873ec9" PhonePublisherId="00000000-0000-0000-0000-000000000000" />
   <Properties>
     <DisplayName>J-Novel Club Client (Unofficial)</DisplayName>

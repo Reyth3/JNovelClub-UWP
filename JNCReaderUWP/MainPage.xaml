@@ -33,7 +33,7 @@
                             </Flyout.FlyoutPresenterStyle>
                             <Grid MinWidth="200" Name="logInSection">
                                 <StackPanel Name="flyoutLogInPanel">
-                                    <TextBox Header="Username:" Name="lUser" />
+                                    <TextBox Header="Email:" Name="lUser" />
                                     <PasswordBox Header="Password:" Name="lPass" />
                                     <Button Margin="2,8" HorizontalAlignment="Stretch" Click="FlyoutLogInButtonClick">Log In</Button>
                                 </StackPanel>
@@ -69,20 +69,20 @@
                         </ListView.ItemTemplate>
                     </ListView>
                     <Button HorizontalAlignment="Stretch" Grid.Row="1" Margin="4" RequestedTheme="Dark">
-                            <StackPanel Orientation="Horizontal">
-                                <FontIcon Margin="2,0" Glyph="&#xE939;" />
-                                <TextBlock Foreground="White" Margin="2,0">Feedback</TextBlock>
-                            </StackPanel>
-                            <Button.Flyout>
-                                <MenuFlyout>
-                                    <MenuFlyoutItem Click="JNCWebsiteClick">J-Novel Club Website</MenuFlyoutItem>
-                                    <MenuFlyoutItem Click="XTZSupportServerItemClick">XYZ Apps Support Server</MenuFlyoutItem>
-                                    <MenuFlyoutItem Click="SubredditItemClick">/r/XYZApps Subreddit</MenuFlyoutItem>
-                                    <MenuFlyoutSeparator />
-                                    <MenuFlyoutItem Click="SendFeedbackItemClick">Send Feedback</MenuFlyoutItem>
-                                    <MenuFlyoutItem Click="ReviewAppItemClick">Review the App</MenuFlyoutItem>
-                                </MenuFlyout>
-                            </Button.Flyout>
+                        <StackPanel Orientation="Horizontal">
+                            <FontIcon Margin="2,0" Glyph="&#xE939;" />
+                            <TextBlock Foreground="White" Margin="2,0">Feedback</TextBlock>
+                        </StackPanel>
+                        <Button.Flyout>
+                            <MenuFlyout>
+                                <MenuFlyoutItem Click="JNCWebsiteClick">J-Novel Club Website</MenuFlyoutItem>
+                                <MenuFlyoutItem Click="XTZSupportServerItemClick">XYZ Apps Support Server</MenuFlyoutItem>
+                                <MenuFlyoutItem Click="SubredditItemClick">/r/XYZApps Subreddit</MenuFlyoutItem>
+                                <MenuFlyoutSeparator />
+                                <MenuFlyoutItem Click="SendFeedbackItemClick">Send Feedback</MenuFlyoutItem>
+                                <MenuFlyoutItem Click="ReviewAppItemClick">Review the App</MenuFlyoutItem>
+                            </MenuFlyout>
+                        </Button.Flyout>
                     </Button>
                 </Grid>
             </SplitView.Pane>

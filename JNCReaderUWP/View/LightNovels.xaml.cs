@@ -29,16 +29,24 @@ namespace JNCReaderUWP.View
         public LightNovels()
         {
             this.InitializeComponent();
+            this.SetUpTransitions();
+            this.NavigationCacheMode = NavigationCacheMode.Enabled;
             DataContext = null;
         }
 
+        List<SeriesViewModel> SeriesList;
+
         private async void Page_Loaded(object sender, RoutedEventArgs e)
         {
-            pw.IsActive = true;
-            var jnc = JNCHelper.InstantiateClient();
-            var seriesResponse = await jnc.Series.GetListOfSeries(null, "parts");
-            DataContext = seriesResponse.Result.OrderBy(o => o.Title).Select(o => new SeriesViewModel(o));
-            pw.IsActive = false;
+            if (SeriesList == null)
+            {
+                pw.IsActive = true;
+                var jnc = JNCHelper.InstantiateClient();
+                var seriesResponse = await jnc.Series.GetListOfSeries(null, "parts");
+                SeriesList = seriesResponse.Result.OrderBy(o => o.Title).Select(o => new SeriesViewModel(o)).ToList();
+                DataContext = SeriesList;
+                pw.IsActive = false;
+            }
         }
 
         private void NovelClicked(object sender, ItemClickEventArgs e)

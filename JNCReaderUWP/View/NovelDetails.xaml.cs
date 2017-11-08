@@ -29,6 +29,7 @@ namespace JNCReaderUWP.View
         public NovelDetails()
         {
             this.InitializeComponent();
+            this.SetUpTransitions();
         }
 
         SeriesViewModel series;

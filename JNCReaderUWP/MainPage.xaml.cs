@@ -32,6 +32,7 @@ namespace JNCReaderUWP
         public MainPage()
         {
             this.InitializeComponent();
+            this.SetUpTransitions();
         }
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
@@ -47,7 +48,7 @@ namespace JNCReaderUWP
             hamburgerMenu.IsPaneOpen = !hamburgerMenu.IsPaneOpen;
             hamburgerMenu.DataContext = new HamburgerMenuItemViewModel[]
             {
-                new HamburgerMenuItemViewModel('\uE70E', "Announcements", typeof(View.Posts)),
+                new HamburgerMenuItemViewModel('\uE1D2', "Announcements", typeof(View.Posts)),
                 new HamburgerMenuItemViewModel('\uE14C', "Novel Updates", typeof(View.News)),
                 new HamburgerMenuItemViewModel('\uE1D3', "Light Novels", typeof(View.LightNovels)),
             };
