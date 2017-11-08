@@ -23,8 +23,8 @@
                             </Grid.ColumnDefinitions>
                             <Image Margin="4,0" MaxWidth="96" Source="{Binding Path=CoverUrl}" />
                             <StackPanel Grid.Column="1">
-                                <TextBlock Text="{Binding Path=Title}" FontWeight="Medium" FontSize="21" Margin="2" />
-                                <TextBlock Text="{Binding Path=Author}" FontSize="19" Margin="2" />
+                                <TextBlock Text="{Binding Path=Title}" FontWeight="Medium" FontSize="21" Margin="2" TextTrimming="CharacterEllipsis" />
+                                <TextBlock Text="{Binding Path=Author}" FontSize="19" Margin="2" TextTrimming="WordEllipsis" />
                                 <Rectangle Fill="{StaticResource HeaderBackgroundColor}" Height="1" Margin="2,3" />
                                 <TextBlock Text="{Binding Path=ShortDescription}" FontSize="17" Margin="2" TextTrimming="WordEllipsis" TextWrapping="WrapWholeWords" MaxHeight="86" />
                             </StackPanel>

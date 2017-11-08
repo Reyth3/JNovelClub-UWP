@@ -10,6 +10,8 @@ using System.Threading.Tasks;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
 using Windows.Media.SpeechSynthesis;
+using Windows.Storage;
+using Windows.System.Display;
 using Windows.UI.Popups;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
@@ -32,20 +34,47 @@ namespace JNCReaderUWP.View
         public Reader()
         {
             this.InitializeComponent();
+            this.SetUpTransitions();
         }
 
         PartViewModel part;
+        string scrollOffsetKey;
 
         ObservableCollection<FrameworkElement> PagesCollection { get; set; }
+        DisplayRequest display;
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
             base.OnNavigatedTo(e);
             part = e.Parameter as PartViewModel;
+            scrollOffsetKey = $"part-{part.Id}-scroll";
+            display = new DisplayRequest();
+            display.RequestActive();
+        }
+
+        protected override void OnNavigatedFrom(NavigationEventArgs e)
+        {
+            var roaming = ApplicationData.Current.RoamingSettings;
+            var offset = sv.VerticalOffset / sv.ScrollableHeight;
+            if (roaming.Values.ContainsKey(scrollOffsetKey))
+                roaming.Values[scrollOffsetKey] = offset;
+            else roaming.Values.Add(scrollOffsetKey, offset);
+            if(display != null)
+            {
+                display.RequestRelease();
+                display = null;
+            }
+            base.OnNavigatedFrom(e);
         }
 
         private async void Page_Loaded(object sender, RoutedEventArgs e)
         {
+            var roaming = ApplicationData.Current.RoamingSettings;
+            if (roaming.Values.ContainsKey("readerTheme"))
+                RequestedTheme = (ElementTheme)((int)roaming.Values["readerTheme"]);
+            var fontFamily = "readerFontFamily";
+            if (roaming.Values.ContainsKey(fontFamily))
+                chapterText.FontFamily = new FontFamily(roaming.Values[fontFamily].ToString());
             if (part == null)
                 return;
             var data = await part.GetPartData();
@@ -57,6 +86,9 @@ namespace JNCReaderUWP.View
                 return;
             }
             chapterText.SetHTML(data.dataHTML);
+            await Task.Delay(1000);
+            if (roaming.Values.ContainsKey(scrollOffsetKey))
+                sv.ChangeView(null, (double)roaming.Values[scrollOffsetKey] * sv.ScrollableHeight, null);
         }
 
         private void ChangeTheme(object sender, RoutedEventArgs e)
@@ -66,6 +98,10 @@ namespace JNCReaderUWP.View
             else if (RequestedTheme == ElementTheme.Default)
                 RequestedTheme = ElementTheme.Dark;
             else RequestedTheme = ElementTheme.Light;
+            var roaming = ApplicationData.Current.RoamingSettings;
+            if (roaming.Values.ContainsKey("readerTheme"))
+                roaming.Values["readerTheme"] = (int)RequestedTheme;
+            else roaming.Values.Add("readerTheme", (int)RequestedTheme);
         }
 
         private void ChangeFontSize(object sender, RoutedEventArgs e)
@@ -92,7 +128,7 @@ namespace JNCReaderUWP.View
                 return;
             var block = chapterText.Blocks[readerPosition];
             var text = block.GetRawText();
-            if (text == "")
+            if (text == "" || !text.IsPronouncable())
             {
                 readerPosition++;
                 await ReadParagraph();
@@ -116,6 +152,21 @@ namespace JNCReaderUWP.View
         {
             readerPosition++;
             await ReadParagraph();
+        }
+
+        private async void ChangeFont(object sender, RoutedEventArgs e)
+        {
+            var fs = new Dialogs.FontSelector();
+            await fs.ShowAsync();
+            if(fs.Result != null)
+            {
+                var roaming = ApplicationData.Current.RoamingSettings;
+                var key = "readerFontFamily";
+                if (roaming.Values.ContainsKey(key))
+                    roaming.Values[key] = fs.Result;
+                else roaming.Values.Add(key, fs.Result);
+                chapterText.FontFamily = new FontFamily(fs.Result);
+            }
         }
     }
 }

@@ -49,11 +49,6 @@
                     </ListView.ItemTemplate>
                 </ListView>
             </PivotItem>
-            <PivotItem Header="Pivots">
-                <Grid Name="Pivot">
-                    
-                </Grid>
-            </PivotItem>
         </Pivot>
     </Grid>
 </Page>

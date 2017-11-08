@@ -19,6 +19,9 @@
     <PackageCertificateKeyFile>JNCReaderUWP_StoreKey.pfx</PackageCertificateKeyFile>
     <RuntimeIdentifiers>win10-arm;win10-arm-aot;win10-x86;win10-x86-aot;win10-x64;win10-x64-aot</RuntimeIdentifiers>
     <PackageCertificateThumbprint>45B36806F2DDDC142F7449D93DBC469A78E823AF</PackageCertificateThumbprint>
+    <AppxAutoIncrementPackageRevision>True</AppxAutoIncrementPackageRevision>
+    <AppxBundle>Always</AppxBundle>
+    <AppxBundlePlatforms>x86|x64|arm</AppxBundlePlatforms>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x86'">
     <DebugSymbols>true</DebugSymbols>
@@ -96,6 +99,8 @@
     <Compile Include="Helpers\BlockHelper.cs" />
     <Compile Include="Helpers\HTMLHelper.cs" />
     <Compile Include="Helpers\JNCHelper.cs" />
+    <Compile Include="Helpers\PageExtensions.cs" />
+    <Compile Include="Helpers\StringHelper.cs" />
     <Compile Include="MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
@@ -106,6 +111,9 @@
     <Compile Include="ViewModel\HamburgerMenuItemViewModel.cs" />
     <Compile Include="ViewModel\API\SeriesViewModel.cs" />
     <Compile Include="ViewModel\KeyValueViewModel.cs" />
+    <Compile Include="View\Dialogs\FontSelector.xaml.cs">
+      <DependentUpon>FontSelector.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\Dialogs\PostDialog.xaml.cs">
       <DependentUpon>PostDialog.xaml</DependentUpon>
     </Compile>
@@ -179,6 +187,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Page>
+    <Page Include="View\Dialogs\FontSelector.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\Dialogs\PostDialog.xaml">
       <SubType>Designer</SubType>

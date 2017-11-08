@@ -27,10 +27,12 @@ namespace JNCReaderUWP.View
         public Posts()
         {
             this.InitializeComponent();
+            this.SetUpTransitions();
         }
 
         private async void Page_Loaded(object sender, RoutedEventArgs e)
         {
+            DataContext = null;
             pw.IsActive = true;
             var jnc = JNCHelper.InstantiateClient();
             var posts = await jnc.Posts.GetList();
